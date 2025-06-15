@@ -10,6 +10,8 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "GAS/AbilitySystemComponentBase.h"
+#include "GAS/HealthAttributeSet.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -52,7 +54,20 @@ AAISampleCharacter::AAISampleCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+
+	// Create the ability system component and set it to be the default for this character
+	AbilitySystemComp = CreateDefaultSubobject<UAbilitySystemComponentBase>(TEXT("AbilitySystemComponent"));
+	HealthSet = CreateDefaultSubobject<UHealthAttributeSet>(TEXT("HealthSet"));
 }
+
+void AAISampleCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	// Provide this character as owner and avatar
+	AbilitySystemComp->InitAbilityActorInfo(this, this);
+}
+
 
 //////////////////////////////////////////////////////////////////////////
 // Input
@@ -126,4 +141,13 @@ void AAISampleCharacter::Look(const FInputActionValue& Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+/// <summary>
+/// Get AbilitySystemComponent (best practice is to use the base class function instead of overriding it)
+/// </summary>
+/// <returns></returns>
+UAbilitySystemComponent* AAISampleCharacter::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComp;
 }

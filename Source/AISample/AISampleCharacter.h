@@ -5,18 +5,20 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "AbilitySystemInterface.h"
 #include "AISampleCharacter.generated.h"
 
 class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
+class UHealthAttributeSet;
 struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 UCLASS(config=Game)
-class AAISampleCharacter : public ACharacter
+class AAISampleCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -45,7 +47,17 @@ class AAISampleCharacter : public ACharacter
 	UInputAction* LookAction;
 
 public:
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Abilities)
+	TObjectPtr<class UAbilitySystemComponentBase> AbilitySystemComp;
+
+	UPROPERTY()
+	TObjectPtr<class UHealthAttributeSet> HealthSet;
+
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
 	AAISampleCharacter();
+	void BeginPlay() override;
 	
 
 protected:
