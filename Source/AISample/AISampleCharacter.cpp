@@ -56,6 +56,11 @@ AAISampleCharacter::AAISampleCharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 
 	// Create the ability system component and set it to be the default for this character
+	InitializeAbilitySystem();
+}
+
+void AAISampleCharacter::InitializeAbilitySystem()
+{
 	AbilitySystemComp = CreateDefaultSubobject<UAbilitySystemComponentBase>(TEXT("AbilitySystemComponent"));
 	HealthSet = CreateDefaultSubobject<UHealthAttributeSet>(TEXT("HealthSet"));
 }

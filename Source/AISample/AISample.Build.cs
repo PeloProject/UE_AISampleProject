@@ -19,9 +19,13 @@ public class AISample : ModuleRules
             "GameplayTasks",
             "OnlineServicesInterface",
             "CoreOnline",
-            "OnlineSubsystem", "OnlineSubsystemEOS", "OnlineSubsystemUtils", "Networking", "Sockets"});
+            "OnlineSubsystem",
+            "OnlineSubsystemEOS",
+            "OnlineSubsystemUtils",
+            "Networking",
+            "Sockets"});
 
-        // ƒpƒX‚ÉƒvƒƒWƒFƒNƒg–¼‚ğ’Ç‰Á
+        // ï¿½pï¿½Xï¿½Éƒvï¿½ï¿½ï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½Ç‰ï¿½
         string ProjectName = Target.ProjectFile.GetFileNameWithoutExtension();
         PublicIncludePaths.Add(ProjectName);
     }

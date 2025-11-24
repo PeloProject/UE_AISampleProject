@@ -22,6 +22,7 @@ class AAISampleCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
+private:
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	USpringArmComponent* CameraBoom;
@@ -46,6 +47,8 @@ class AAISampleCharacter : public ACharacter, public IAbilitySystemInterface
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
+	// アビリティシステム関連の初期化
+	void InitializeAbilitySystem();
 public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Abilities)
